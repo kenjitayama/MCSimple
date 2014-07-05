@@ -21,6 +21,7 @@
 		7CE144F819682B5200748F6D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE144DA19682B5200748F6D /* UIKit.framework */; };
 		7CE1450019682B5200748F6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CE144FE19682B5200748F6D /* InfoPlist.strings */; };
 		7CE1450219682B5200748F6D /* MCSimpleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1450119682B5200748F6D /* MCSimpleTests.m */; };
+		7CE1450D196833BF00748F6D /* EXMCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1450C196833BF00748F6D /* EXMCManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		7CE144FD19682B5200748F6D /* MCSimpleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MCSimpleTests-Info.plist"; sourceTree = "<group>"; };
 		7CE144FF19682B5200748F6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7CE1450119682B5200748F6D /* MCSimpleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCSimpleTests.m; sourceTree = "<group>"; };
+		7CE1450B196833BF00748F6D /* EXMCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXMCManager.h; sourceTree = "<group>"; };
+		7CE1450C196833BF00748F6D /* EXMCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXMCManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				7CE144E819682B5200748F6D /* Main.storyboard */,
 				7CE144EB19682B5200748F6D /* EXViewController.h */,
 				7CE144EC19682B5200748F6D /* EXViewController.m */,
+				7CE1450B196833BF00748F6D /* EXMCManager.h */,
+				7CE1450C196833BF00748F6D /* EXMCManager.m */,
 				7CE144EE19682B5200748F6D /* Images.xcassets */,
 				7CE144DD19682B5200748F6D /* Supporting Files */,
 			);
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CE1450D196833BF00748F6D /* EXMCManager.m in Sources */,
 				7CE144ED19682B5200748F6D /* EXViewController.m in Sources */,
 				7CE144E319682B5200748F6D /* main.m in Sources */,
 				7CE144E719682B5200748F6D /* EXAppDelegate.m in Sources */,

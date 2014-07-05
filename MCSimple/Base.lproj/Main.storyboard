@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="E0Q-Zc-qSs">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="fnk-86-efo">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="E0Q-Zc-qSs" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ktQ-KE-HBH">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="13J-X8-Rf5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dxn-i0-TUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-512" y="135"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="EXViewController" sceneMemberID="viewController">
@@ -15,11 +30,70 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlU-dv-vP2">
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H6X-Vx-EaB">
+                                        <rect key="frame" x="20" y="26" width="149" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="browser"/>
+                                            <segment title="advertiser"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="peerModeSegmentedControlChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="hRM-dc-duv"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yug-kp-jOf">
+                                        <rect key="frame" x="251" y="25" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="startSwitchChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="muU-iJ-IRU"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="6hw-ci-xh6"/>
+                                    <constraint firstAttribute="centerY" secondItem="H6X-Vx-EaB" secondAttribute="centerY" id="CLr-ae-Bbt"/>
+                                    <constraint firstAttribute="centerY" secondItem="Yug-kp-jOf" secondAttribute="centerY" id="QLy-5R-4bM"/>
+                                    <constraint firstItem="H6X-Vx-EaB" firstAttribute="leading" secondItem="PlU-dv-vP2" secondAttribute="leading" constant="20" id="Vxj-m6-UK8"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yug-kp-jOf" secondAttribute="trailing" constant="20" id="eTc-qb-iHg"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-85-WF7">
+                                <rect key="frame" x="0.0" y="144" width="320" height="424"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="FQz-Kv-4N3"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="V7U-aV-8nb"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PlU-dv-vP2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="27c-Yf-dMl"/>
+                            <constraint firstItem="PlU-dv-vP2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="46Q-L4-0ej"/>
+                            <constraint firstAttribute="trailing" secondItem="PlU-dv-vP2" secondAttribute="trailing" id="4bt-IR-rJo"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="pNR-85-WF7" secondAttribute="bottom" id="RVb-G9-sFV"/>
+                            <constraint firstAttribute="trailing" secondItem="pNR-85-WF7" secondAttribute="trailing" id="Uhb-5b-NXC"/>
+                            <constraint firstItem="pNR-85-WF7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="b9N-21-dqT"/>
+                            <constraint firstItem="pNR-85-WF7" firstAttribute="top" secondItem="PlU-dv-vP2" secondAttribute="bottom" id="oVI-qO-yt4"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="a9T-8d-wJL"/>
+                    <connections>
+                        <outlet property="peerModeSegmentedControl" destination="H6X-Vx-EaB" id="TIJ-Aj-aYA"/>
+                        <outlet property="peersTableView" destination="pNR-85-WF7" id="PEB-wK-Kkt"/>
+                        <outlet property="startSwitch" destination="Yug-kp-jOf" id="vMe-pe-VfZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="40" y="135"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EXMCManager.h"
 
-@interface EXViewController : UIViewController
+@interface EXViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EXMCManagerDelegate>
 
 @end
