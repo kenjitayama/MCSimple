@@ -27,6 +27,8 @@ NSUInteger const kEXMCInvitetimeout = 30;
 @property (nonatomic, strong) MCNearbyServiceBrowser *browser;
 @property BOOL browsing;
 
+@property (nonatomic, strong) MCPeerID *browserPeerID;
+
 
 @end
 
@@ -119,6 +121,7 @@ static EXMCManager *_sharedManager = nil;
                 [self.advertiser startAdvertisingPeer];
                 self.advertising = YES;
                 self.shouldStartAdvertisingOnFullDisconnection = NO;
+                self.browserPeerID = nil;
                 break;
             }
             case EXMCPeerModeBrowser: {
@@ -128,6 +131,8 @@ static EXMCManager *_sharedManager = nil;
                 self.browser.delegate = self;
                 [self.browser startBrowsingForPeers];
                 self.browsing = YES;
+                self.browserPeerID = self.myPeerID;
+                break;
             }
             default: {
                 break;
@@ -173,6 +178,7 @@ didReceiveInvitationFromPeer:(MCPeerID *)peerID
     self.advertising = NO;
     self.shouldStartAdvertisingOnFullDisconnection = YES;
     invitationHandler(YES, self.currentSession);
+    self.browserPeerID = peerID;
 }
 
 #pragma mark - MCNearbyServiceBrowserDelegate
@@ -187,6 +193,7 @@ didNotStartBrowsingForPeers:(NSError *)error {
                                delegate:nil
                       cancelButtonTitle:@"OK"
                       otherButtonTitles:nil] show];
+    self.browserPeerID = nil;
 }
 
 
@@ -248,6 +255,18 @@ didReceiveStream:(NSInputStream *)stream
     
     switch (state) {
         case MCSessionStateNotConnected: {
+            
+            // Got disconnected from a browser
+            if ([peerID isEqual:self.browserPeerID]) {
+                self.browserPeerID = nil;
+                
+                // If I am a advertiser and got disconnected from a browser, disconnect from all
+                if (self.peerMode == EXMCPeerModeAdvertiser && [session.connectedPeers count]) {
+                    [session disconnect];
+                }
+            }
+
+            // Restart advertising if necessary
             if (![session.connectedPeers count] && !self.advertising && self.shouldStartAdvertisingOnFullDisconnection) {
                 [self startWithPeerMode:EXMCPeerModeAdvertiser
                                delegate:self.delegate];
