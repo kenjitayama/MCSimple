@@ -1,0 +1,7 @@
+MCSimple.xcodeproj/xcuserdata/*
+MCSimple.xcodeproj/project.xcworkspace/xcuserdata/*
+MCSimple.xcworkspace/xcuserdata/*
+*.xccheckout
+.DS_Store
+Pods/*
+Podfile.lock
