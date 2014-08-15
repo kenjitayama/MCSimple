@@ -95,6 +95,7 @@ static EXMCManager *_sharedManager = nil;
         self.advertising = NO;
         self.shouldStartAdvertisingOnFullDisconnection = NO;
         self.browsing = NO;
+        self.browserPeerID = NO;
     });
 }
 
