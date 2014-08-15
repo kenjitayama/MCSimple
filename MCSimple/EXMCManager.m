@@ -81,24 +81,27 @@ static EXMCManager *_sharedManager = nil;
 
 #pragma mark - start/stop
 
-- (void)stop {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        if (self.currentSession) {
-            [self.currentSession disconnect];
-        }
-        if (self.advertiser) {
-            [self.advertiser stopAdvertisingPeer];
-        }
-        if (self.browser) {
-            [self.browser stopBrowsingForPeers];
-        }
-        self.advertising = NO;
-        self.shouldStartAdvertisingOnFullDisconnection = NO;
-        self.browsing = NO;
-        self.browserPeerID = NO;
-    });
+- (void)stopNoBackgroundDispatch {
+    self.shouldStartAdvertisingOnFullDisconnection = NO;
+    if (self.currentSession) {
+        [self.currentSession disconnect];
+    }
+    if (self.advertiser) {
+        [self.advertiser stopAdvertisingPeer];
+    }
+    if (self.browser) {
+        [self.browser stopBrowsingForPeers];
+    }
+    self.advertising = NO;
+    self.browsing = NO;
+    self.browserPeerID = NO;
 }
 
+- (void)stop {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self stopNoBackgroundDispatch];
+    });
+}
 
 - (void)startWithPeerMode:(EXMCPeerMode)peerMode
                  delegate:(id)delegate {
@@ -108,7 +111,7 @@ static EXMCManager *_sharedManager = nil;
 
         self.delegate = delegate;
         
-        [self stop];
+        [self stopNoBackgroundDispatch];
         
         self.peerMode = peerMode;
         
